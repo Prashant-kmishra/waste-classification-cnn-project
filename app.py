@@ -215,28 +215,17 @@ test_transforms = transforms.Compose ([
 # Apple Glass Header
 st.markdown('''
 <div class="apple-glass">
-    <h1>♻️ Waste Classification App</h1>
-    <p>Upload a file or click a picture to instantly classify waste as Organic or Non-organic.</p>
+    <h1>♻️ Waste Classification</h1>
+    <p>Upload an image to instantly classify waste as Organic or Non-organic.</p>
 </div>
 ''', unsafe_allow_html=True)
 
-# Tabs for Uploading or using Phone Camera
-tab1, tab2 = st.tabs(["📁 Upload Image", "📸 Take a Picture"])
-
-with tab1:
-    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
-    camera_file = None
-
-with tab2:
-    st.write("Use your phone or webcam to snap a picture of the waste directly.")
-    camera_file = st.camera_input("Open Camera")
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
 # Determine which image source to use
 image = None
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert('RGB')
-elif camera_file is not None:
-    image = Image.open(camera_file).convert('RGB')
 
 if image is not None:
     # Show uploaded image
